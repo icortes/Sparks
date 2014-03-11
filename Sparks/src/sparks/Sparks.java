@@ -1,6 +1,6 @@
 package sparks;
 
-import gamveviews.SparksGameView;
+import gameviews.SparksGameView;
 
 import java.awt.Color;
 
@@ -23,7 +23,7 @@ public class Sparks extends Game {
 	}
 
 	public static void main(String[] args) {
-		ImageCache.create(Sparks.class, "/rsc/");
+		ImageCache.create(Sparks.class, "/sparks/rsc/");
 		Sparks f = new Sparks();
 		f.startGame("Sparks");
 	}
