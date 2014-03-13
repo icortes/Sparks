@@ -94,57 +94,43 @@ public class PlatformController implements Controller {
 		Set<Integer> keys = context.getKeyCodesPressed();
 
 		int horizontal = 0;
+		int vertical = 0;
 		boolean jump = false;
 
 		for (int key : keys) {
 			if (key == controlScheme.lt) {
-				horizontal += 1;
-			} else if (key == controlScheme.rt) {
 				horizontal -= 1;
+			} else if (key == controlScheme.rt) {
+				horizontal += 1;
+			} else if (key == controlScheme.uw) {
+				vertical -= 1;
+			} else if (key == controlScheme.dw) {
+				vertical += 1;
 			} else if (key == controlScheme.jump) {
 				jump = true;
 			}
 		}
 
-		boolean onSolidGround = false;
+		boolean onSolid = false;
 
-		List<SolidGround> solidGrounds = context
-				.getInstancesOfClass(SolidGround.class);
+		List<Solids> solidGrounds = context.getInstancesOfClass(Solids.class);
 
-		for (SolidGround solidGround : solidGrounds) {
+		for (Solids solidGround : solidGrounds) {
 
 			GObject groundObject = (GObject) solidGround;
 			if (target.hitTest(groundObject)) {
-				onSolidGround = true;
+				onSolid = true;
 				break;
 			}
 
 		}
 
-		if (onSolidGround) {
-			if (jump) {
-
-				vy = maxJump;
-
-			} else {
-
-				vy = 0;
-			}
-
-		} else {
-			vy += gravity;
-			if (vy > target.getHeight()) {
-				vy = target.getHeight();
-			}
-
-			/*
-			 * if (vy + gravity < target.getHeight()) { vy += gravity; }
-			 */
-
-			// vy = Math.min(vy, target.getHeight());
-			// vy += gravity;
+		if (onSolid) {
+			vy = 0;
 		}
+
 		vx = horizontal * maxSpeed;
+		vy = vertical * maxSpeed;
 
 		target.setLocation(target.getX() + vx, target.getY() + vy);
 	}

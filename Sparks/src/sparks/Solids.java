@@ -10,6 +10,6 @@ import jgame.GPaintable;
  * @author William Chargin
  * 
  */
-public interface SolidGround extends GPaintable {
+public interface Solids extends GPaintable {
 
 }
