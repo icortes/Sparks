@@ -28,10 +28,12 @@ public class SparksGameView extends GContainer {
 
 			@Override
 			public void invoke(GObject target, Context context) {
-				addAt(new BluePixel(), 0, 0);
+				addAt(new BluePixel(), 100, 200);
 				List<Pixel> px = context.getInstancesOfClass(Pixel.class);
 				for (Pixel p : px) {
-					p.moveToward(p.distanceTo(ds) /50, ds);
+					p.moveAtAngle(p.distanceTo(ds), 30);
+					/* p.moveToward(Math.sin(p.distanceTo(ds)), ds); */
+					// System.out.println(p.distanceTo(ds));
 				}
 			}
 		};
